@@ -12,24 +12,12 @@ A custom component for Trading212
 
 ## Installation
 
-1. Use [HACS](https://hacs.xyz/docs/setup/download), in `HACS > Integrations > Explore & Add Repositories` search for "Trading212".
-2. Restart Home Assistant.
-3. [![Add Integration][add-integration-badge]][add-integration] or in the HA UI go to "Settings" -> "Devices & Services" then click "+" and search for "Trading212".
-
+1. Click install.
+2. Reboot Home Assistant.
+3. Hard refresh browser cache.
+4. [![Add Integration][add-integration-badge]][add-integration] or in the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Trading212".
 
 <!---->
-
-## Usage
-
-The `Trading212` integration offers integration with the Trading212 API. This provides a device per position, each device will have 6 entities as shown below.
-
-This integration provides the following entities:
-.
-- Sensors - current price, average price, quantity, current value, buy value, percent change.
-
-## Options
-
-- Seconds between polling - Number of seconds between each call for data from the Trading212 API, default is 5 seconds.
 
 ---
 

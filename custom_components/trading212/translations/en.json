@@ -1,0 +1,59 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "API Key"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthentiaction required for Trading212",
+        "data": {
+          "api_key": "API Key"
+        }
+      }
+    },
+    "error": {
+      "bad_api_key": "Invalid API key",
+      "timeout": "Timeout contacting Trading212",
+      "limited": "Hit trading212 rate limit, wait and try again",
+      "unknown": "Unknown error occured"
+    },
+    "abort": {
+      "already_configured": "Device already configured",
+      "reauth_successful": "Reauthentication successful"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure options for Trading212",
+        "data": {
+          "pollinterval": "Polling interval in seconds, min 5"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "averageprice": {
+        "name": "Average price"
+      },
+      "currentprice": {
+        "name": "Current price"
+      },
+      "quantity": {
+        "name": "Quantity"
+      },
+      "currentvalue": {
+        "name": "Current value"
+      },
+      "buyvalue": {
+        "name": "Buy value"
+      },
+      "percentchange": {
+        "name": "Percent change"
+      }
+    }
+  }
+}
