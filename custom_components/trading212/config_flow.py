@@ -20,13 +20,14 @@ from homeassistant.const import CONF_API_KEY, CONF_SCAN_INTERVAL
 from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
-from .const import DOMAIN, POLLING_INTERVAL
+from .const import CONF_API_SECRET, DOMAIN, POLLING_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_API_KEY): str,
+        vol.Required(CONF_API_SECRET): str,
     }
 )
 
@@ -47,7 +48,8 @@ class Trading212ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
         if user_input is not None:
             trading212_api = Trading212API(
-                auth_token=user_input[CONF_API_KEY],
+                api_key=user_input[CONF_API_KEY],
+                api_secret=user_input[CONF_API_SECRET],
                 session=async_get_clientsession(self.hass),
             )
             try:
@@ -67,7 +69,10 @@ class Trading212ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 self._abort_if_unique_id_configured()
                 return self.async_create_entry(
                     title=str(metadata["id"]),
-                    data={CONF_API_KEY: user_input[CONF_API_KEY]},
+                    data={
+                        CONF_API_KEY: user_input[CONF_API_KEY],
+                        CONF_API_SECRET: user_input[CONF_API_SECRET],
+                    },
                     options={CONF_SCAN_INTERVAL: POLLING_INTERVAL},
                 )
 
@@ -100,7 +105,8 @@ class Trading212ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             entry_data = self.reauth_entry.data
             trading212_api = Trading212API(
-                entry_data[CONF_API_KEY],
+                api_key=entry_data[CONF_API_KEY],
+                api_secret=entry_data[CONF_API_SECRET],
                 session=async_get_clientsession(self.hass),
             )
             try:
@@ -121,7 +127,9 @@ class Trading212ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="reauth_confirm",
-            data_schema=vol.Schema({vol.Required(CONF_API_KEY): str}),
+            data_schema=vol.Schema(
+                {vol.Required(CONF_API_KEY): str, vol.Required(CONF_API_SECRET): str}
+            ),
             errors=errors,
         )
 
@@ -145,7 +153,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 vol.Required(
                     CONF_SCAN_INTERVAL,
                     default=self.config_entry.options.get(CONF_SCAN_INTERVAL),
-                ): vol.All(vol.Coerce(int), vol.Range(min=5)),
+                ): vol.All(vol.Coerce(int), vol.Range(min=10)),
             }
         )
 

@@ -3,13 +3,15 @@
     "step": {
       "user": {
         "data": {
-          "api_key": "API Key"
+          "api_key": "API key",
+          "api_secret": "API secret"
         }
       },
       "reauth_confirm": {
         "title": "Reauthentiaction required for Trading212",
         "data": {
-          "api_key": "API Key"
+          "api_key": "API key",
+          "api_secret": "API secret"
         }
       }
     },

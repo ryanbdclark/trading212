@@ -15,7 +15,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
-from .const import DOMAIN
+from .const import CONF_API_SECRET, DOMAIN
 from .coordinator import Trading212Coordinator
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
@@ -28,12 +28,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data.setdefault(DOMAIN, {})
 
     trading212_api = Trading212API(
-        auth_token=entry.data[CONF_API_KEY],
+        api_key=entry.data[CONF_API_KEY],
+        api_secret=entry.data[CONF_API_SECRET],
         session=async_get_clientsession(hass),
     )
 
     try:
-        await asyncio.sleep(5)
         positions = await trading212_api.get_positions()
 
     except Trading212BadApiKey as err:

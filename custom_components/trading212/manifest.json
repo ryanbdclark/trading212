@@ -5,11 +5,11 @@
     "@ryanbdclark"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/ryanbdclark/trading212",
+  "documentation": "https://www.home-assistant.io/integrations/trading212",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/ryanbdclark/trading212/issues",
   "requirements": [
-    "pytrading212api==2025.4.3"
+    "pytrading212api==2026.1.1"
   ],
-  "version": "2025.4.0"
+  "version": "2026.1.0"
 }

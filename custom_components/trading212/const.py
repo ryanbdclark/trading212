@@ -2,4 +2,5 @@
 
 DOMAIN = "trading212"
 
-POLLING_INTERVAL = 5
+POLLING_INTERVAL = 10
+CONF_API_SECRET = "api_secret"
